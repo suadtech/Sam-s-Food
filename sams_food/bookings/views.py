@@ -26,7 +26,7 @@ def reservation_manage(request, pk):
 
 def reservation_cancel(request, pk):
     reservation = get_object_or_404(Reservation, pk=pk)   
-   if request.method == 'POST':
+    if request.method == 'POST':
         reservation.status = 'cancelled'
         reservation.save()
         messages.success(request, 'Your reservation has been cancelled.')

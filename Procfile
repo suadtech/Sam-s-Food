@@ -1,0 +1,1 @@
+web: gunicorn sams_food.wsgi
