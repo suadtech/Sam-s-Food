@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block title %}Our Menu - Sam's Food{% endblock %}
+
+{% block content %}
+<div class="row mb-4">
+    <div class="col-12 text-center">
+        <h1>Our Menu</h1>
+        <p class="lead">Delicious dishes prepared with love</p>
+    </div>
+</div>
+
+{% for category in categories %}
+<div class="row mb-5">
+    <div class="col-12">
+        <h2 class="border-bottom pb-2">{{ category.name }}</h2>
+        {% if category.description %}
+        <p>{{ category.description }}</p>
+        {% endif %}
+    </div>
+    
+    {% for item in category.items.all %}
+    {% if item.is_available %}
+    <div class="col-md-6 col-lg-4 mb-4">
+        <div class="card h-100 menu-item-card">
+            {% if item.image %}
+            <img src="{{ item.image.url }}" class="card-img-top" alt="{{ item.name }}">
+            {% endif %}
+            <div class="card-body">
+                <h5 class="card-title">{{ item.name }}</h5>
+                <p class="card-text">{{ item.description }}</p>
+            </div>
+            <div class="card-footer bg-white border-top-0">
+                <div class="d-flex justify-content-between align-items-center">
+                    <span class="h5 text-primary">${{ item.price }}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+    {% endfor %}
+</div>
+{% endfor %}
+{% endblock %}
